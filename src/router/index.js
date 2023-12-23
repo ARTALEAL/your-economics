@@ -49,6 +49,12 @@ const routes = [
     meta: { layout: 'main' },
     component: () => import('@/views/Record.vue'),
   },
+  {
+    path: '/detail',
+    name: 'detail',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Detail.vue'),
+  },
 ];
 
 const router = createRouter({
