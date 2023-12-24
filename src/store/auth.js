@@ -12,10 +12,11 @@ export default {
       try {
         await signInWithEmailAndPassword(auth, email, password);
       } catch (error) {
+        commit('setError', error.code);
         throw error;
       }
     },
-    async register({ dispatch }, { email, password, name }) {
+    async register({ dispatch, commit }, { email, password, name }) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         const uid = await dispatch('getUid');
@@ -24,6 +25,7 @@ export default {
           info: { bill: 10000, name: name },
         });
       } catch (error) {
+        commit('setError', error.code);
         throw error;
       }
     },
