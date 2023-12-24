@@ -7,18 +7,20 @@
           v-model.trim="email"
           id="email"
           type="text"
-          class="validate"
           :class="{
-            invalid:
-              (v$.email.$dirty && !v$.email.$required) ||
-              (v$.email.$dirty && !v$.email.email),
+            invalid: v$.email.$error,
           }"
+          @blur="v$.email.$touch"
         />
         <label for="email">Email</label>
-        <small v-if="!v$.email.$required" class="helper-text invalid"
+        <small
+          v-if="v$.email.required.$invalid && v$.email.$error"
+          class="helper-text invalid"
           >Введите email</small
         >
-        <small v-else-if="!v$.email.$email" class="helper-text invalid"
+        <small
+          v-else-if="v$.email.email.$invalid && v$.email.$error"
+          class="helper-text invalid"
           >Введите корректный email</small
         >
       </div>
@@ -29,21 +31,23 @@
           type="password"
           class="validate"
           :class="{
-            invalid:
-              (v$.password.$dirty && !v$.password.$required) ||
-              (v$.password.$dirty && !v$.password.minLength),
+            invalid: v$.password.$error,
           }"
+          @blur="v$.password.$touch"
         />
         <label for="password">Пароль</label>
         <small
-          v-if="v$.password.$dirty && !v$.password.$required"
+          v-if="v$.password.required.$invalid && v$.password.$dirty"
           class="helper-text invalid"
           >Введите пароль</small
         >
         <small
-          v-else-if="v$.password.$dirty && !v$.password.minLength"
+          v-else-if="
+            v$.password.minLength.$invalid && !v$.password.required.$invalid
+          "
           class="helper-text invalid"
-          >Пароль должен быть не меньше 6-ти символов</small
+          >Пароль должен быть минимум 6 символов, сейчас
+          {{ password.length }}</small
         >
       </div>
     </div>
@@ -67,10 +71,8 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength } from '@vuelidate/validators';
 export default {
-  setup() {
-    return { v$: useVuelidate() };
-  },
   name: 'login',
+  setup: () => ({ v$: useVuelidate() }),
   data() {
     return {
       email: '',
@@ -79,23 +81,20 @@ export default {
   },
   validations() {
     return {
-      email: { email, required },
-      password: { minLength: minLength(6), required },
+      email: { required, email },
+      password: { required, minLength: minLength(6) },
     };
   },
   methods: {
-    async handleSubmit() {
-      const isFormCorrect = await this.v$.$validate();
-      if (!isFormCorrect) return;
+    handleSubmit() {
+      if (this.v$.$invalid) {
+        this.v$.$touch();
+        console.log('invalid');
+        return;
+      }
       this.$router.push('/');
+      console.log('valid');
     },
-    // handleSubmit() {
-    //   if (this.v$.$invalid) {
-    //     this.v$.$touch();
-    //     return;
-    //   }
-    //   this.$router.push('/');
-    // },
   },
 };
 </script>
