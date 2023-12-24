@@ -71,6 +71,8 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength } from '@vuelidate/validators';
+import messages from '@/utils/messages';
+
 export default {
   name: 'login',
   setup: () => ({ v$: useVuelidate() }),
@@ -100,6 +102,11 @@ export default {
       };
       console.log(formData);
     },
+  },
+  mounted() {
+    if (messages[this.$route.query.message]) {
+      this.$message(messages[this.$route.query.message]);
+    }
   },
 };
 </script>
