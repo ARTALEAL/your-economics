@@ -53,6 +53,24 @@
       </div>
       <div class="input-field">
         <input
+          id="confirmPassword"
+          v-model="confirmPassword"
+          type="password"
+          class="validate"
+          :class="{
+            invalid: v$.confirmPassword.$error && v$.confirmPassword.$dirty,
+          }"
+          @blur="v$.confirmPassword.$touch"
+        />
+        <label for="confirmPassword">Повторите пароль</label>
+        <small
+          v-if="v$.confirmPassword.$error && v$.confirmPassword.$dirty"
+          class="helper-text invalid"
+          >Пароль не совпадает</small
+        >
+      </div>
+      <div class="input-field">
+        <input
           id="name"
           type="text"
           v-model.trim="name"
@@ -93,7 +111,7 @@
 
 <script>
 import { useVuelidate } from '@vuelidate/core';
-import { required, email, minLength } from '@vuelidate/validators';
+import { required, email, minLength, sameAs } from '@vuelidate/validators';
 export default {
   name: 'register',
   setup: () => ({ v$: useVuelidate() }),
@@ -102,6 +120,7 @@ export default {
       email: '',
       password: '',
       name: '',
+      confirmPassword: '',
       agree: false,
     };
   },
@@ -109,6 +128,7 @@ export default {
     return {
       email: { required, email },
       password: { required, minLength: minLength(6) },
+      confirmPassword: { sameAs: sameAs(this.password), required },
       name: { required, minLength: minLength(1) },
       agree: { checked: (v) => v },
     };
