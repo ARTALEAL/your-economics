@@ -89,17 +89,22 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       if (this.v$.$invalid) {
         this.v$.$touch();
         console.log('invalid');
         return;
       }
-      this.$router.push('/');
       const formData = {
         email: this.email,
         password: this.password,
       };
+
+      try {
+        await this.$store.dispatch('login', formData);
+        this.$router.push('/');
+      } catch (error) {}
+
       console.log(formData);
     },
   },

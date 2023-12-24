@@ -134,7 +134,7 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       if (this.v$.$invalid) {
         this.v$.$touch();
         console.log('invalid');
@@ -145,8 +145,14 @@ export default {
         password: this.password,
         name: this.name,
       };
-      this.$router.push('/');
-      console.log(formData);
+
+      try {
+        await this.$store.dispatch('register', formData);
+        this.$router.push('/');
+        console.log(formData);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
