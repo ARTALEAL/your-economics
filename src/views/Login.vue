@@ -46,7 +46,8 @@
             v$.password.minLength.$invalid && !v$.password.required.$invalid
           "
           class="helper-text invalid"
-          >Пароль должен быть минимум 6 символов, сейчас
+          >Пароль должен быть минимум
+          {{ v$.password.minLength.$params.min }} символов, сейчас
           {{ password.length }}</small
         >
       </div>
@@ -93,7 +94,11 @@ export default {
         return;
       }
       this.$router.push('/');
-      console.log('valid');
+      const formData = {
+        email: this.email,
+        password: this.password,
+      };
+      console.log(formData);
     },
   },
 };
