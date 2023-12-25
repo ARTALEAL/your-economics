@@ -16,7 +16,7 @@
             data-target="dropdown"
             ref="dropdown"
           >
-            USER NAME
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -82,6 +82,14 @@ export default {
         options.second = '2-digit';
       }
       return new Intl.DateTimeFormat('ru-RU', options).format(this.date);
+    },
+  },
+  computed: {
+    name() {
+      if (this.$store.getters.info.name) {
+        return this.$store.getters.info.name;
+      }
+      return 'User Name';
     },
   },
 };
