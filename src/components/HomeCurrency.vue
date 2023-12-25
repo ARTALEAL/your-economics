@@ -15,10 +15,10 @@
           </thead>
 
           <tbody>
-            <tr>
-              <td>руб</td>
-              <td>12121</td>
-              <td>12.12.12</td>
+            <tr v-for="currency in currencies" :key="currency">
+              <td>{{ currency }}</td>
+              <td>{{ rates[currency].toFixed(2) }}</td>
+              <td>{{ dateFilter(date) }}</td>
             </tr>
           </tbody>
         </table>
@@ -28,7 +28,35 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    rates: Object,
+    date: String,
+  },
+  data() {
+    return {
+      currencies: ['RUB', 'USD', 'EUR'],
+      format: 'date',
+    };
+  },
+  methods: {
+    dateFilter(value, format = this.format) {
+      const parsed = Date.parse(value);
+      const options = {};
+      if (format.includes('date')) {
+        options.day = '2-digit';
+        options.month = 'long';
+        options.year = 'numeric';
+      }
+      if (format.includes('time')) {
+        options.hour = '2-digit';
+        options.minute = '2-digit';
+        options.second = '2-digit';
+      }
+      return new Intl.DateTimeFormat('ru-RU', options).format(parsed);
+    },
+  },
+};
 </script>
 
 <style></style>

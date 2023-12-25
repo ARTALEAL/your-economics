@@ -3,14 +3,14 @@
     <div class="page-title">
       <h3>Счет</h3>
 
-      <button class="btn waves-effect waves-light btn-small">
+      <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
     <loader v-if="isLoading" />
     <div class="row" v-else>
       <home-bill :rates="currency.rates" />
-      <home-currency />
+      <home-currency :rates="currency.rates" :date="currency.date" />
     </div>
   </div>
 </template>
@@ -31,6 +31,14 @@ export default {
     this.currency = await this.$store.dispatch('fetchCurrency');
     console.log(this.currency.rates);
     this.isLoading = false;
+  },
+  methods: {
+    async refresh() {
+      this.isLoading = true;
+      this.currency = await this.$store.dispatch('fetchCurrency');
+      console.log(this.currency.rates);
+      this.isLoading = false;
+    },
   },
 };
 </script>
