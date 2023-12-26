@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { auth } from '@/firebase';
 export default {
   data() {
     return {
@@ -56,11 +57,15 @@ export default {
       this.$router.push('/login?message=logout');
     },
   },
-  mounted() {
+  async mounted() {
     this.interval = setInterval(() => (this.date = new Date()), 1000);
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
       constrainWidth: true,
     });
+
+    if (auth.currentUser) {
+      await this.$store.dispatch('fetchInfo');
+    }
   },
   beforeUnmount() {
     clearInterval(this.interval);
@@ -74,7 +79,6 @@ export default {
         if (this.$store.getters.info.name) {
           return this.$store.getters.info.name;
         }
-        return 'User Name';
       },
     },
     dateFilter: {
