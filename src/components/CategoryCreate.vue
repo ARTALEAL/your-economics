@@ -76,9 +76,11 @@ export default {
       try {
         const category = await this.$store.dispatch('createCategory', formData);
         console.log(category);
-        // this.$router.push('/');
         this.name = '';
         this.limit = '';
+        this.v$.$reset();
+        this.$message('Категория создана');
+        this.$emit('created', category);
       } catch (error) {}
     },
   },
