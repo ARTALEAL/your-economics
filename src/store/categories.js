@@ -55,6 +55,7 @@ export default {
         });
       } catch (error) {
         commit('setError', error);
+        throw error;
       }
     },
   },

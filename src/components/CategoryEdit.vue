@@ -115,7 +115,6 @@ export default {
         this.$message('Категория обновлена');
         this.$emit('updated', formData);
       } catch (error) {}
-      console.log('submit');
     },
   },
 };
