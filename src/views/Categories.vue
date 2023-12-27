@@ -4,9 +4,10 @@
       <h3>Категории</h3>
     </div>
     <section>
-      <div class="row">
+      <loader v-if="isLoading" />
+      <div v-else class="row">
         <category-create @created="addNewCategory" />
-        <category-edit />
+        <category-edit :categories="categories" />
       </div>
     </section>
   </div>
@@ -15,13 +16,15 @@
 <script>
 import CategoryCreate from '@/components/CategoryCreate.vue';
 import CategoryEdit from '@/components/CategoryEdit.vue';
+import Loader from '@/components/app/Loader.vue';
 
 export default {
   name: 'categories',
-  components: { CategoryCreate, CategoryEdit },
+  components: { CategoryCreate, CategoryEdit, Loader },
   data() {
     return {
       categories: [],
+      isLoading: true,
     };
   },
   methods: {
@@ -30,6 +33,9 @@ export default {
       console.log(this.categories);
     },
   },
+  async mounted() {
+    this.categories = await this.$store.dispatch('fetcCategories');
+    this.isLoading = false;
+  },
 };
 </script>
-CategoryEdit
