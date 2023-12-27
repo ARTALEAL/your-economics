@@ -7,7 +7,13 @@
       <loader v-if="isLoading" />
       <div v-else class="row">
         <category-create @created="addNewCategory" />
-        <category-edit :categories="categories" />
+        <category-edit
+          :categories="categories"
+          @updated="updateCategories"
+          :key="categories.length + updateCount"
+          v-if="categories.length"
+        />
+        <p class="center" v-else>У вас пока нет категорий</p>
       </div>
     </section>
   </div>
@@ -25,12 +31,19 @@ export default {
     return {
       categories: [],
       isLoading: true,
+      updateCount: 0,
     };
   },
   methods: {
     addNewCategory(category) {
       this.categories.push(category);
       console.log(this.categories);
+    },
+    updateCategories(category) {
+      const index = this.categories.findIndex((c) => c.id === category.id);
+      this.categories[index].name = category.name;
+      this.categories[index].limit = category.limit;
+      this.updateCount++;
     },
   },
   async mounted() {

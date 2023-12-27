@@ -1,5 +1,11 @@
 import { db } from '@/firebase';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 export default {
   actions: {
     async createCategory({ commit, dispatch }, { name, limit }) {
@@ -37,6 +43,18 @@ export default {
       } catch (error) {
         commit('setError', error);
         throw error;
+      }
+    },
+    async updateCategory({ commit, dispatch }, { id, name, limit }) {
+      try {
+        const uid = await dispatch('getUid');
+        const updateRef = doc(db, `users/${uid}/categories`, `${id}`);
+        await updateDoc(updateRef, {
+          name,
+          limit,
+        });
+      } catch (error) {
+        commit('setError', error);
       }
     },
   },
