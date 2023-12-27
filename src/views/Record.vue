@@ -88,6 +88,7 @@
 import Loader from '@/components/app/Loader.vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, minValue } from '@vuelidate/validators';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'record',
@@ -126,6 +127,15 @@ export default {
       amount: { required, minValue: minValue(1) },
     };
   },
+  computed: {
+    ...mapGetters(['info']),
+    canCreateRecord() {
+      if (this.type === 'income') {
+        return true;
+      }
+      return this.info.bill >= this.amount;
+    },
+  },
   methods: {
     async handleSubmit() {
       if (this.v$.$invalid) {
@@ -136,8 +146,30 @@ export default {
         description: this.description,
         amount: this.amount,
         id: this.currentCategory,
+        type: this.type,
+        date: new Date().toJSON(),
       };
-      console.log('submit', formData);
+
+      try {
+        if (this.canCreateRecord) {
+          await this.$store.dispatch('createRecord', formData);
+          const bill =
+            this.type === 'income'
+              ? this.info.bill + this.amount
+              : this.info.bill - this.amount;
+          await this.$store.dispatch('updateInfo', { bill });
+          this.$message('Запись успешно добавлена');
+          this.v$.$reset();
+          this.amount = '';
+          this.description = '';
+        } else {
+          this.$message(
+            `У вас недостаточно средств на счёте (не хватает ${
+              this.amount - this.info.bill
+            } руб.)`
+          );
+        }
+      } catch (error) {}
     },
   },
 };

@@ -1,5 +1,5 @@
 import { db } from '@/firebase';
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, setDoc } from 'firebase/firestore';
 export default {
   state: {
     info: { bill: 0, name: 'Имя пользователя' },
@@ -10,7 +10,22 @@ export default {
         const uid = await dispatch('getUid');
         const info = await getDoc(doc(db, 'users', uid));
         commit('setInfo', info.data().info);
-      } catch (error) {}
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
+    },
+    async updateInfo({ commit, dispatch, getters }, newData) {
+      try {
+        const uid = await dispatch('getUid');
+        const updateData = { ...getters.info, ...newData };
+        const infoRef = doc(db, `users`, uid);
+        setDoc(infoRef, { info: updateData }, { merge: true });
+        commit('setInfo', updateData);
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
     },
   },
   getters: {
