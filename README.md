@@ -25,3 +25,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - валидация форм vuelidate
 - materialize.css
 - шаблоны layouts
+- ProtectedRoutes
+- Авторизация
+- База данных (firebase)
+- Сообщения пользователю
+- Лоадеры

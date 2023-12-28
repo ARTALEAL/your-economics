@@ -2,7 +2,7 @@ import { db } from '@/firebase';
 import { getDoc, doc, setDoc } from 'firebase/firestore';
 export default {
   state: {
-    info: { bill: 0, name: 'Имя пользователя' },
+    info: {},
   },
   actions: {
     async fetchInfo({ dispatch, commit }) {
