@@ -7,37 +7,44 @@
     <div class="history-chart">
       <canvas></canvas>
     </div>
-
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Сумма</th>
-            <th>Дата</th>
-            <th>Категория</th>
-            <th>Тип</th>
-            <th>Открыть</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>1212</td>
-            <td>12.12.32</td>
-            <td>name</td>
-            <td>
-              <span class="white-text badge red">Расход</span>
-            </td>
-            <td>
-              <button class="btn-small btn">
-                <i class="material-icons">open_in_new</i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <loader v-if="isLoading" />
+    <p class="center" v-else-if="!records.length">
+      У вас пока нет записей.<router-link to="/record">
+        Хотите добавить первую запись?</router-link
+      >
+    </p>
+    <section v-else>
+      <history-table :records="records" />
     </section>
   </div>
 </template>
+
+<script>
+import HistoryTable from '@/components/HistoryTable.vue';
+import Loader from '@/components/app/Loader.vue';
+export default {
+  name: 'history',
+  data() {
+    return {
+      isLoading: true,
+      records: [],
+      categories: [],
+    };
+  },
+  components: { HistoryTable, Loader },
+  async mounted() {
+    // this.records = await this.$store.dispatch('fetchRecords');
+    const records = await this.$store.dispatch('fetchRecords');
+    this.categories = await this.$store.dispatch('fetcCategories');
+    this.records = records.map((record) => {
+      return {
+        ...record,
+        categoryName: this.categories.find((c) => c.id === record.id).name,
+        recordType: record.type === 'income' ? 'green' : 'red',
+        recordText: record.type === 'income' ? 'Доход' : 'Расход',
+      };
+    });
+    this.isLoading = false;
+  },
+};
+</script>
