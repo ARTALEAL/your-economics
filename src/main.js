@@ -5,6 +5,7 @@ import router from './router';
 import store from './store';
 import Loader from '@/components/app/Loader.vue';
 import messagePlugin from './utils/message.plugin';
+import Paginate from 'vuejs-paginate-next';
 import tooltipDirective from './directives/tooltip.directive';
 import 'materialize-css/dist/js/materialize.min';
 import { auth } from './firebase';
@@ -19,6 +20,7 @@ auth.onAuthStateChanged(() => {
       .use(messagePlugin)
       .directive('tooltip', tooltipDirective)
       .component('Loader', Loader)
+      .component('paginate', Paginate)
       .mount('#app');
   }
 });

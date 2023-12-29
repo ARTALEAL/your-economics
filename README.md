@@ -30,3 +30,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - База данных (firebase)
 - Сообщения пользователю
 - Лоадеры
+- fixer api
+- vuejs-paginate-next plugin
+- lodash

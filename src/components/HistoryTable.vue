@@ -12,7 +12,7 @@
     </thead>
 
     <tbody>
-      <tr v-for="(record, index) in records" :key="record.id">
+      <tr v-for="(record, index) in records" :key="record.recordId">
         <td>{{ index + 1 }}</td>
         <td>{{ currencyFilter(record.amount) }}</td>
         <td>{{ new Date(record.date).toLocaleString() }}</td>
