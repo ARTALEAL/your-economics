@@ -5,7 +5,8 @@
     </div>
 
     <div class="history-chart">
-      <canvas></canvas>
+      <Pie v-if="rendered" :data="chartData" :options="options" ref="chart" />
+      <p v-else class="center">Загрузка графика...</p>
     </div>
     <loader v-if="isLoading" />
     <p class="center" v-else-if="!records.length">
@@ -32,6 +33,11 @@
 import HistoryTable from '@/components/HistoryTable.vue';
 import Loader from '@/components/app/Loader.vue';
 import paginationMixin from '@/mixins/pagination.mixin';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Chart } from 'chart.js';
+import { Pie } from 'vue-chartjs';
+import colors from '@/utils/colorsGenerator';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
   name: 'history',
@@ -40,24 +46,51 @@ export default {
     return {
       isLoading: true,
       records: [],
+      categories: [],
+      rendered: false,
+      chartData: null,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
     };
   },
-  components: { HistoryTable, Loader },
+  components: { HistoryTable, Loader, Pie },
   async mounted() {
-    this.records = await this.$store.dispatch('fetchRecords');
-    const categories = await this.$store.dispatch('fetcCategories');
-    this.setupPagination(
-      this.records.map((record) => {
-        return {
-          ...record,
-          categoryName: categories.find((c) => c.id === record.id).name,
-          recordType: record.type === 'income' ? 'green' : 'red',
-          recordText: record.type === 'income' ? 'Доход' : 'Расход',
-        };
-      })
-    );
-    this.isLoading = false;
+    try {
+      this.records = await this.$store.dispatch('fetchRecords');
+      const categories = await this.$store.dispatch('fetcCategories');
+      this.setupPagination(
+        this.records.map((record) => {
+          return {
+            ...record,
+            categoryName: categories.find((c) => c.id === record.id).name,
+            recordType: record.type === 'income' ? 'green' : 'red',
+            recordText: record.type === 'income' ? 'Доход' : 'Расход',
+          };
+        })
+      );
+      console.log('sss', this.records);
+      this.chartData = {
+        labels: categories.map((c) => c.name),
+        datasets: [
+          {
+            label: 'Расходы по категориям',
+            backgroundColor: colors,
+            data: categories.map((c) => {
+              return this.records.reduce((acc, rec) => {
+                if (rec.id === c.id && rec.type === 'outcome') {
+                  acc += rec.amount;
+                }
+                return acc;
+              }, 0);
+            }),
+          },
+        ],
+      };
+      this.rendered = true;
+      this.isLoading = false;
+    } catch (error) {}
   },
-  methods: {},
 };
 </script>

@@ -34,3 +34,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - vuejs-paginate-next plugin
 - lodash
 - mixins
+- chartJS библиотека
+- Генерация цветов для графика
