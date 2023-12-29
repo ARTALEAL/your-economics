@@ -5,6 +5,7 @@ import {
   doc,
   getDocs,
   updateDoc,
+  getDoc,
 } from 'firebase/firestore';
 export default {
   actions: {
@@ -40,6 +41,23 @@ export default {
         });
         console.log(categories);
         return categories;
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
+    },
+    async fetcCategory({ dispatch, commit }, id) {
+      try {
+        const uid = await dispatch('getUid');
+        const docRef = doc(db, `users/${uid}/categories/`, id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log('Document data:', docSnap.data());
+          return docSnap.data();
+        } else {
+          console.log('No such document!');
+        }
       } catch (error) {
         commit('setError', error);
         throw error;

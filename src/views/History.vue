@@ -33,7 +33,6 @@ export default {
   },
   components: { HistoryTable, Loader },
   async mounted() {
-    // this.records = await this.$store.dispatch('fetchRecords');
     const records = await this.$store.dispatch('fetchRecords');
     this.categories = await this.$store.dispatch('fetcCategories');
     this.records = records.map((record) => {
@@ -45,6 +44,7 @@ export default {
       };
     });
     this.isLoading = false;
+    console.log(this.records);
   },
 };
 </script>
