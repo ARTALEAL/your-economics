@@ -70,7 +70,6 @@ export default {
           };
         })
       );
-      console.log('sss', this.records);
       this.chartData = {
         labels: categories.map((c) => c.name),
         datasets: [

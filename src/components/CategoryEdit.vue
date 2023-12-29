@@ -47,6 +47,12 @@
           Обновить
           <i class="material-icons right">send</i>
         </button>
+        <button
+          class="btn waves-effect red darken-4 delete-btn"
+          @click.prevent="handleDelete"
+        >
+          Удалить категорию
+        </button>
       </form>
     </div>
   </div>
@@ -114,6 +120,12 @@ export default {
         await this.$store.dispatch('updateCategory', formData);
         this.$message('Категория обновлена');
         this.$emit('updated', formData);
+      } catch (error) {}
+    },
+    async handleDelete() {
+      try {
+        console.log('delete', this.currentCategory);
+        this.$error('Доделать!!!');
       } catch (error) {}
     },
   },

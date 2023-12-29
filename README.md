@@ -35,4 +35,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - lodash
 - mixins
 - chartJS библиотека
-- Генерация цветов для графика
+- Генерация цветов для графика (100)

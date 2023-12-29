@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      currencies: ['RUB', 'USD', 'EUR'],
+      currencies: ['RUB', 'USD', 'EUR', 'TRY'],
       format: 'date',
     };
   },
