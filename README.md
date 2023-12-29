@@ -33,3 +33,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - fixer api
 - vuejs-paginate-next plugin
 - lodash
+- mixins
