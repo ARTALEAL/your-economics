@@ -1,18 +1,17 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>История записей</h3>
+      <h3>{{ localize('historyTitle') }}</h3>
     </div>
 
     <div class="history-chart">
       <Pie v-if="rendered" :data="chartData" :options="options" ref="chart" />
-      <p v-else class="center">Загрузка графика...</p>
+      <p v-else class="center">{{ localize('historyLoading') }}</p>
     </div>
     <loader v-if="isLoading" />
     <p class="center" v-else-if="!records.length">
-      У вас пока нет записей.<router-link to="/record">
-        Хотите добавить первую запись?</router-link
-      >
+      {{ localize('historyEmptyRecords')
+      }}<router-link to="/record"> {{ localize('firstRecord') }}</router-link>
     </p>
     <section v-else>
       <history-table :records="items" />
@@ -20,8 +19,8 @@
         v-model="page"
         :page-count="totalPages"
         :click-handler="pageChangeHandler"
-        :prev-text="'Назад'"
-        :next-text="'Вперёд'"
+        :prev-text="localize('prev')"
+        :next-text="localize('next')"
         :container-class="'pagination'"
         :page-class="'waves-effect'"
       ></paginate>
@@ -36,6 +35,7 @@ import paginationMixin from '@/mixins/pagination.mixin';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Chart } from 'chart.js';
 import { Pie } from 'vue-chartjs';
 import colors from '@/utils/colorsGenerator';
+import localize from '@/utils/localize';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -54,6 +54,9 @@ export default {
         maintainAspectRatio: false,
       },
     };
+  },
+  methods: {
+    localize,
   },
   components: { HistoryTable, Loader, Pie },
   async mounted() {
@@ -74,7 +77,7 @@ export default {
         labels: categories.map((c) => c.name),
         datasets: [
           {
-            label: 'Расходы по категориям',
+            label: localize('ExpensesCategories'),
             backgroundColor: colors,
             data: categories.map((c) => {
               return this.records.reduce((acc, rec) => {

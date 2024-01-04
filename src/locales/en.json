@@ -1,5 +1,6 @@
 {
   "ProfileTitle": "Profile",
+  "logOut": "Log Out",
 
   "nameInput": "Name",
   "inputErrorReq": "The field must not be empty",
@@ -31,5 +32,29 @@
   "descriptionError": "Description must not be empty",
   "successMessage": "Entry added successfully",
   "recordErrorMessage": "You do not have enough funds in your account (",
-  "recordErrorMessageCur": "rubles is missing)"
+  "recordErrorMessageCur": "rubles is missing)",
+
+  "planning": "Planning",
+  "limitExceeded": "Limit exceeded by",
+  "left": "Left",
+
+  "historyTitle": "Records History",
+  "historyLoading": "Loading chart...",
+  "historyEmptyRecords": "You don't have any entries yet.",
+  "firstRecord": "Want to add your first entry?",
+  "date": "Date",
+  "category": "Category",
+  "type": "Type",
+  "open": "Open",
+  "moreInfo": "More info",
+  "prev": "Prev",
+  "next": "Next",
+  "ExpensesCategories": "Expenses by category",
+  "history": "History",
+  "noRecord": "There is no such entry",
+
+  "bill": "Bill",
+  "AccountCurrency": "Account in foreign currency",
+  "currency": "Currency",
+  "rate": "Rate"
 }

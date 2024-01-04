@@ -3,9 +3,13 @@
     <loader v-if="isLoading" />
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
-        <router-link to="/history" class="breadcrumb">История</router-link>
+        <router-link to="/history" class="breadcrumb">{{
+          localize('history')
+        }}</router-link>
         <a @click.prevent class="breadcrumb">
-          {{ record.type === 'outcome' ? 'Расход' : 'Доход' }}
+          {{
+            record.type === 'outcome' ? localize('outcome') : localize('income')
+          }}
         </a>
       </div>
       <div class="row">
@@ -15,9 +19,11 @@
             :class="record.type === 'outcome' ? 'red' : 'green'"
           >
             <div class="card-content white-text">
-              <p>Описание: {{ record.description }}</p>
-              <p>Сумма: {{ currencyFilter(record.amount) }}</p>
-              <p>Категория: {{ record.category }}</p>
+              <p>{{ localize('description') }}: {{ record.description }}</p>
+              <p>
+                {{ localize('amount') }}: {{ currencyFilter(record.amount) }}
+              </p>
+              <p>{{ localize('category') }}: {{ record.category }}</p>
 
               <small>{{
                 formatDate(new Date(record.date), 'date-time')
@@ -27,12 +33,15 @@
         </div>
       </div>
     </div>
-    <p class="center" v-else>Такая запись отсутствует</p>
+    <p class="center" v-else>{{ localize('noRecord') }}</p>
   </div>
 </template>
 
 <script>
 import Loader from '@/components/app/Loader.vue';
+import localize from '@/utils/localize';
+import store from '@/store';
+import { mapGetters } from 'vuex';
 export default {
   components: { Loader },
   name: 'detail',
@@ -54,6 +63,7 @@ export default {
     this.isLoading = false;
   },
   methods: {
+    localize,
     currencyFilter(value, currency = 'RUB') {
       return new Intl.NumberFormat('ru-RU', {
         style: 'currency',
@@ -61,6 +71,7 @@ export default {
       }).format(value);
     },
     formatDate(value, format) {
+      const locale = store.getters.info.locale || 'ru-RU';
       const options = {};
       if (format.includes('date')) {
         options.day = '2-digit';
@@ -72,7 +83,7 @@ export default {
         options.minute = '2-digit';
         options.second = '2-digit';
       }
-      return new Intl.DateTimeFormat('ru-RU', options).format(value);
+      return new Intl.DateTimeFormat(locale, options).format(value);
     },
   },
 };

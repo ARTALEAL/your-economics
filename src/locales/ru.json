@@ -1,5 +1,6 @@
 {
   "ProfileTitle": "Профиль",
+  "logOut": "Выйти",
 
   "nameInput": "Имя",
   "inputErrorReq": "Поле не должно быть пустым",
@@ -32,5 +33,29 @@
   "descriptionError": "Описание не должно быть пустым",
   "successMessage": "Запись успешно добавлена",
   "recordErrorMessage": "У вас недостаточно средств на счёте (не хватает",
-  "recordErrorMessageCur": "руб.)"
+  "recordErrorMessageCur": "руб.)",
+
+  "planning": "Планирование",
+  "limitExceeded": "Лимит превышен на",
+  "left": "Осталось",
+
+  "historyTitle": "История записей",
+  "historyLoading": "Загрузка графика...",
+  "historyEmptyRecords": "У вас пока нет записей.",
+  "firstRecord": "Хотите добавить первую запись?",
+  "date": "Дата",
+  "category": "Категория",
+  "type": "Тип",
+  "open": "Открыть",
+  "moreInfo": "Подробнее",
+  "prev": "Назад",
+  "next": "Вперёд",
+  "ExpensesCategories": "Расходы по категориям",
+  "history": "История",
+  "noRecord": "Такая запись отсутствует",
+
+  "bill": "Счёт",
+  "AccountCurrency": "Счет в валюте",
+  "currency": "Валюта",
+  "rate": "Курс"
 }

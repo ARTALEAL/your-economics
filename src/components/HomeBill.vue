@@ -2,7 +2,7 @@
   <div class="col s12 m6 l4">
     <div class="card light-blue bill-card">
       <div class="card-content white-text">
-        <span class="card-title">Счет в валюте</span>
+        <span class="card-title">{{ localize('AccountCurrency') }}</span>
 
         <p class="currency-line" v-for="currency in currencies" :key="currency">
           <span>{{ getCurrency(currency) }}</span>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import localize from '@/utils/localize';
 export default {
   props: {
     rates: Object,
@@ -30,6 +31,7 @@ export default {
     },
   },
   methods: {
+    localize,
     currencyFilter(value, currency = 'RUB') {
       return new Intl.NumberFormat('ru-RU', {
         style: 'currency',

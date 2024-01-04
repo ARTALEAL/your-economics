@@ -8,9 +8,9 @@
         <table>
           <thead>
             <tr>
-              <th>Валюта</th>
-              <th>Курс</th>
-              <th>Дата</th>
+              <th>{{ localize('currency') }}</th>
+              <th>{{ localize('rate') }}</th>
+              <th>{{ localize('date') }}</th>
             </tr>
           </thead>
 
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import localize from '@/utils/localize';
+import store from '@/store';
 export default {
   props: {
     rates: Object,
@@ -40,7 +42,9 @@ export default {
     };
   },
   methods: {
+    localize,
     dateFilter(value, format = this.format) {
+      const locale = store.getters.info.locale || 'ru-RU';
       const parsed = Date.parse(value);
       const options = {};
       if (format.includes('date')) {
@@ -53,7 +57,7 @@ export default {
         options.minute = '2-digit';
         options.second = '2-digit';
       }
-      return new Intl.DateTimeFormat('ru-RU', options).format(parsed);
+      return new Intl.DateTimeFormat(locale, options).format(parsed);
     },
   },
 };

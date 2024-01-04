@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Планирование</h3>
+      <h3>{{ localize('planning') }}</h3>
       <h4>{{ currencyFilter(info.bill) }}</h4>
     </div>
     <loader v-if="isLoading" />
@@ -31,6 +31,7 @@
 <script>
 import Loader from '@/components/app/Loader.vue';
 import { mapGetters } from 'vuex';
+import localize from '@/utils/localize';
 export default {
   components: { Loader },
   name: 'planning',
@@ -56,8 +57,10 @@ export default {
         percent < 70 ? 'green' : percent < 100 ? 'yellow' : 'red';
       const tooltipValue = cat.limit - spending;
       const tooltipText = `${
-        tooltipValue < 0 ? 'Лимит превышен на' : 'Осталось'
-      } ${Math.abs(tooltipValue)} руб.`;
+        tooltipValue < 0
+          ? `${localize('limitExceeded')}`
+          : `${localize('left')}`
+      } ${Math.abs(tooltipValue)} ${localize('inputLimitCurrency')}.`;
       return {
         ...cat,
         progressColor,
@@ -73,6 +76,7 @@ export default {
     ...mapGetters(['info']),
   },
   methods: {
+    localize,
     currencyFilter(value, currency = 'RUB') {
       return new Intl.NumberFormat('ru-RU', {
         style: 'currency',

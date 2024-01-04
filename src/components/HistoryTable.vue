@@ -3,11 +3,11 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Сумма</th>
-        <th>Дата</th>
-        <th>Категория</th>
-        <th>Тип</th>
-        <th>Открыть</th>
+        <th>{{ localize('amount') }}</th>
+        <th>{{ localize('date') }}</th>
+        <th>{{ localize('category') }}</th>
+        <th>{{ localize('type') }}</th>
+        <th>{{ localize('open') }}</th>
       </tr>
     </thead>
 
@@ -19,14 +19,14 @@
         <td>{{ record.categoryName }}</td>
         <td>
           <span class="white-text badge" :class="[record.recordType]">{{
-            record.recordText
+            localize(record.type)
           }}</span>
         </td>
         <td>
           <button
             class="btn-small btn"
             @click="$router.push(`/detail/${record.recordId}`)"
-            v-tooltip="'Подробнее'"
+            v-tooltip="localize('moreInfo')"
           >
             <i class="material-icons">open_in_new</i>
           </button>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import localize from '@/utils/localize';
 export default {
   name: 'history-table',
   props: {
@@ -46,6 +47,7 @@ export default {
     },
   },
   methods: {
+    localize,
     currencyFilter(value, currency = 'RUB') {
       return new Intl.NumberFormat('ru-RU', {
         style: 'currency',

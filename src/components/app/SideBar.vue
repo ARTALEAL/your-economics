@@ -13,16 +13,20 @@
 </template>
 
 <script>
+import localize from '@/utils/localize';
 export default {
   props: ['isOpen'],
+  methods: {
+    localize,
+  },
   data() {
     return {
       links: [
-        { route: '/', title: 'Счёт' },
-        { route: '/history', title: 'История' },
-        { route: '/planning', title: 'Планирование' },
-        { route: '/record', title: 'Новая запись' },
-        { route: '/categories', title: 'Категории' },
+        { route: '/', title: localize('bill') },
+        { route: '/history', title: localize('history') },
+        { route: '/planning', title: localize('planning') },
+        { route: '/record', title: localize('newRecord') },
+        { route: '/categories', title: localize('categoriesTitle') },
       ],
     };
   },

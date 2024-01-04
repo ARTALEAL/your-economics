@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Счет</h3>
+      <h3>{{ localize('bill') }}</h3>
 
       <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
@@ -18,7 +18,7 @@
 <script>
 import HomeBill from '@/components/HomeBill.vue';
 import HomeCurrency from '@/components/HomeCurrency.vue';
-
+import localize from '@/utils/localize';
 export default {
   components: { HomeBill, HomeCurrency },
   data() {
@@ -33,6 +33,7 @@ export default {
     this.isLoading = false;
   },
   methods: {
+    localize,
     async refresh() {
       this.isLoading = true;
       this.currency = await this.$store.dispatch('fetchCurrency');
