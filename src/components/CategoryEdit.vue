@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Редактировать</h4>
+        <h4>{{ localize('editCategoryTitle') }}</h4>
       </div>
 
       <form @submit.prevent="handleSubmit">
@@ -12,7 +12,7 @@
               {{ cat.name }}
             </option>
           </select>
-          <label>Выберите категорию</label>
+          <label>{{ localize('editCategorySelect') }}</label>
         </div>
 
         <div class="input-field">
@@ -23,10 +23,10 @@
             :class="{ invalid: v$.name.$error }"
             @blur="v$.name.$touch"
           />
-          <label for="name">Название</label>
-          <span class="helper-text invalid" v-if="v$.name.$error"
-            >Введите название категории</span
-          >
+          <label for="name">{{ localize('createCategoryName') }}</label>
+          <span class="helper-text invalid" v-if="v$.name.$error">{{
+            localize('createCategoryNameError')
+          }}</span>
         </div>
 
         <div class="input-field">
@@ -37,14 +37,15 @@
             :class="{ invalid: v$.limit.$error }"
             @blur="v$.limit.$touch"
           />
-          <label for="limit">Лимит</label>
+          <label for="limit">{{ localize('inputLimitPlaceholder') }}</label>
           <span class="helper-text invalid" v-if="v$.limit.$error"
-            >Минимальная сумма {{ v$.limit.minValue.$params.min }} руб.</span
+            >{{ localize('inputLimit') }} {{ v$.limit.minValue.$params.min }}
+            {{ localize('inputLimitCurrency') }}.</span
           >
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Обновить
+          {{ localize('updateBtn') }}
           <i class="material-icons right">send</i>
         </button>
         <!-- <button
@@ -61,6 +62,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import { required, minValue } from '@vuelidate/validators';
+import localize from '@/utils/localize';
 export default {
   name: 'categoryEdit',
   data() {
@@ -96,7 +98,6 @@ export default {
   unmounted() {
     if (this.select && this.select.destroy) {
       this.select.unmount;
-      console.log('unmount');
     }
   },
   validations() {
@@ -106,6 +107,7 @@ export default {
     };
   },
   methods: {
+    localize,
     async handleSubmit() {
       if (this.v$.$invalid) {
         this.v$.$touch;
@@ -118,7 +120,7 @@ export default {
       };
       try {
         await this.$store.dispatch('updateCategory', formData);
-        this.$message('Категория обновлена');
+        this.$message(localize('editCategoryMessage'));
         this.$emit('updated', formData);
       } catch (error) {}
     },

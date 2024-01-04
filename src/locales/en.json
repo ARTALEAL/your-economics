@@ -16,5 +16,20 @@
   "inputLimitPlaceholder": "Limit",
   "inputLimit": "Minimum amount",
   "inputLimitCurrency": "rub",
-  "createdCategoryMessage": "Category created"
+  "createdCategoryMessage": "Category created",
+
+  "editCategoryMessage": "Category updated",
+  "editCategoryTitle": "Category edit",
+  "editCategorySelect": "Select a category",
+
+  "newRecord": "New record",
+  "createCategory": "Add a new category",
+  "income": "Income",
+  "outcome": "Outcome",
+  "amount": "Amount",
+  "description": "Description",
+  "descriptionError": "Description must not be empty",
+  "successMessage": "Entry added successfully",
+  "recordErrorMessage": "You do not have enough funds in your account (",
+  "recordErrorMessageCur": "rubles is missing)"
 }

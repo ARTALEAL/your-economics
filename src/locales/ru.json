@@ -17,5 +17,20 @@
   "inputLimitPlaceholder": "Лимит",
   "inputLimit": "Минимальная сумма",
   "inputLimitCurrency": "руб",
-  "createdCategoryMessage": "Категория создана"
+  "createdCategoryMessage": "Категория создана",
+
+  "editCategoryMessage": "Категория обновлена",
+  "editCategoryTitle": "Редактировать",
+  "editCategorySelect": "Выберите категорию",
+
+  "newRecord": "Новая запись",
+  "createCategory": "Добавить новую категорию",
+  "income": "Доход",
+  "outcome": "Расход",
+  "amount": "Сумма",
+  "description": "Описание",
+  "descriptionError": "Описание не должно быть пустым",
+  "successMessage": "Запись успешно добавлена",
+  "recordErrorMessage": "У вас недостаточно средств на счёте (не хватает",
+  "recordErrorMessageCur": "руб.)"
 }
