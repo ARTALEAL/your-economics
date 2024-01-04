@@ -2,6 +2,10 @@
   "ProfileTitle": "Profile",
   "logOut": "Log Out",
 
+  "loginTitle": "Home accounting",
+
+  "password": "Password",
+
   "nameInput": "Name",
   "inputErrorReq": "The field must not be empty",
 
@@ -37,6 +41,8 @@
   "planning": "Planning",
   "limitExceeded": "Limit exceeded by",
   "left": "Left",
+  "emptyPlanning": "You don't have categories yet.",
+  "addCategory": "Add a new category",
 
   "historyTitle": "Records History",
   "historyLoading": "Loading chart...",
@@ -56,5 +62,6 @@
   "bill": "Bill",
   "AccountCurrency": "Account in foreign currency",
   "currency": "Currency",
-  "rate": "Rate"
+  "rate": "Rate",
+  "exchangeRate": "Exchange Rate"
 }

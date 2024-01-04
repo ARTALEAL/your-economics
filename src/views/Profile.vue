@@ -82,7 +82,6 @@ export default {
           name: this.name,
           locale: this.isRuLocale ? 'ru-RU' : 'en-US',
         });
-        console.log(formData);
       } catch (error) {}
     },
   },

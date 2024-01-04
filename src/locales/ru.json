@@ -2,6 +2,10 @@
   "ProfileTitle": "Профиль",
   "logOut": "Выйти",
 
+  "password": "Пароль",
+
+  "loginTitle": "Личная бухгалтерия",
+
   "nameInput": "Имя",
   "inputErrorReq": "Поле не должно быть пустым",
 
@@ -38,6 +42,8 @@
   "planning": "Планирование",
   "limitExceeded": "Лимит превышен на",
   "left": "Осталось",
+  "emptyPlanning": "У вас пока нет категорий.",
+  "addCategory": "Добавить новую категорию",
 
   "historyTitle": "История записей",
   "historyLoading": "Загрузка графика...",
@@ -57,5 +63,6 @@
   "bill": "Счёт",
   "AccountCurrency": "Счет в валюте",
   "currency": "Валюта",
-  "rate": "Курс"
+  "rate": "Курс",
+  "exchangeRate": "Курс валют"
 }

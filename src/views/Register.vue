@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="handleSubmit">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">Личная бухгалтерия</span>
       <div class="input-field">
         <input
           v-model.trim="email"

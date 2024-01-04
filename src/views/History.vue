@@ -10,8 +10,8 @@
     </div>
     <loader v-if="isLoading" />
     <p class="center" v-else-if="!records.length">
-      {{ localize('historyEmptyRecords')
-      }}<router-link to="/record"> {{ localize('firstRecord') }}</router-link>
+      {{ localize('historyEmptyRecords') }}
+      <router-link to="/record"> {{ localize('firstRecord') }}</router-link>
     </p>
     <section v-else>
       <history-table :records="items" />

@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="handleSubmit">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">{{ localize('loginTitle') }}</span>
       <div class="input-field">
         <input
           v-model.trim="email"
@@ -35,7 +35,7 @@
           }"
           @blur="v$.password.$touch"
         />
-        <label for="password">Пароль</label>
+        <label for="password">{{ localize('password') }}</label>
         <small
           v-if="v$.password.required.$invalid && v$.password.$dirty"
           class="helper-text invalid"
@@ -72,6 +72,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength } from '@vuelidate/validators';
 import messages from '@/utils/messages';
+import localize from '@/utils/localize';
 
 export default {
   name: 'login',
@@ -89,6 +90,7 @@ export default {
     };
   },
   methods: {
+    localize,
     async handleSubmit() {
       if (this.v$.$invalid) {
         this.v$.$touch();

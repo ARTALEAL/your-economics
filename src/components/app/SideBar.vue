@@ -30,6 +30,20 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$store.watch(
+      (state, getters) => getters.info,
+      (newValue, oldVale) => {
+        this.links = [
+          { route: '/', title: localize('bill') },
+          { route: '/history', title: localize('history') },
+          { route: '/planning', title: localize('planning') },
+          { route: '/record', title: localize('newRecord') },
+          { route: '/categories', title: localize('categoriesTitle') },
+        ];
+      }
+    );
+  },
 };
 </script>
 

@@ -6,8 +6,8 @@
     </div>
     <loader v-if="isLoading" />
     <p class="center" v-else-if="!categories.length">
-      У вас пока нет категорий.
-      <router-link to="/categories">Добавить новую категорию</router-link>
+      {{ localize('emptyPlanning') }}
+      <router-link to="/categories">{{ localize('addCategory') }}</router-link>
     </p>
     <section v-else>
       <div v-for="category in categories" :key="category.id">
