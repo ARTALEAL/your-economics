@@ -47,12 +47,12 @@
           Обновить
           <i class="material-icons right">send</i>
         </button>
-        <button
+        <!-- <button
           class="btn waves-effect red darken-4 delete-btn"
           @click.prevent="handleDelete"
         >
           Удалить категорию
-        </button>
+        </button> -->
       </form>
     </div>
   </div>
@@ -122,12 +122,12 @@ export default {
         this.$emit('updated', formData);
       } catch (error) {}
     },
-    async handleDelete() {
-      try {
-        console.log('delete', this.currentCategory);
-        this.$error('Доделать!!!');
-      } catch (error) {}
-    },
+    // async handleDelete() {
+    //   try {
+    //     console.log('delete', this.currentCategory);
+    //     this.$error('Доделать!!!');
+    //   } catch (error) {}
+    // },
   },
 };
 </script>

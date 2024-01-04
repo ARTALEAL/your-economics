@@ -22,7 +22,7 @@ export default {
         const uid = await dispatch('getUid');
         console.log(uid);
         await setDoc(doc(db, 'users', uid), {
-          info: { bill: 10000, name: name },
+          info: { bill: 10000, name: name, locale: 'ru-RU' },
         });
       } catch (error) {
         commit('setError', error.code);

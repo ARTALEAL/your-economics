@@ -41,6 +41,7 @@
 
 <script>
 import { auth } from '@/firebase';
+import store from '@/store';
 export default {
   data() {
     return {
@@ -84,6 +85,7 @@ export default {
     dateFilter: {
       get(value, format = this.format) {
         const options = {};
+        const locale = store.getters.info.locale || 'ru-RU';
         if (format.includes('date')) {
           options.day = '2-digit';
           options.month = 'long';
@@ -94,7 +96,7 @@ export default {
           options.minute = '2-digit';
           options.second = '2-digit';
         }
-        return new Intl.DateTimeFormat('ru-RU', options).format(this.date);
+        return new Intl.DateTimeFormat(locale, options).format(this.date);
       },
     },
   },
