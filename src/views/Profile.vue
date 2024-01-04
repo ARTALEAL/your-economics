@@ -15,10 +15,10 @@
           }"
           @blur="v$.name.$touch"
         />
-        <label for="description">Имя</label>
-        <span class="helper-text invalid" v-if="v$.name.required.$invalid"
-          >Поле не должно быть пустым</span
-        >
+        <label for="description">{{ localize('nameInput') }}</label>
+        <span class="helper-text invalid" v-if="v$.name.required.$invalid">{{
+          localize('inputErrorReq')
+        }}</span>
       </div>
       <div class="switch">
         <label>
@@ -29,7 +29,7 @@
         </label>
       </div>
       <button class="btn waves-effect waves-light" type="submit">
-        Обновить
+        {{ localize('updateBtn') }}
         <i class="material-icons right">send</i>
       </button>
     </form>

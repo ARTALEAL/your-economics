@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Создать</h4>
+        <h4>{{ localize('createCategoryTitle') }}</h4>
       </div>
 
       <form @submit.prevent="handleSubmit">
@@ -14,10 +14,10 @@
             :class="{ invalid: v$.name.$error }"
             @blur="v$.name.$touch"
           />
-          <label for="name">Название</label>
-          <span class="helper-text invalid" v-if="v$.name.$error"
-            >Введите название категории</span
-          >
+          <label for="name">{{ localize('createCategoryName') }}</label>
+          <span class="helper-text invalid" v-if="v$.name.$error">{{
+            localize('createCategoryNameError')
+          }}</span>
         </div>
 
         <div class="input-field">
@@ -28,14 +28,15 @@
             :class="{ invalid: v$.limit.$error }"
             @blur="v$.limit.$touch"
           />
-          <label for="limit">Лимит</label>
+          <label for="limit">{{ localize('inputLimitPlaceholder') }}</label>
           <span class="helper-text invalid" v-if="v$.limit.$error"
-            >Минимальная сумма {{ v$.limit.minValue.$params.min }} руб.</span
+            >{{ localize('inputLimit') }} {{ v$.limit.minValue.$params.min }}
+            {{ localize('inputLimitCurrency') }}.</span
           >
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Создать
+          {{ localize('createBtn') }}
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -46,6 +47,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import { required, minValue } from '@vuelidate/validators';
+import localize from '@/utils/localize';
 export default {
   name: 'categoryCreate',
   setup: () => ({ v$: useVuelidate() }),
@@ -62,6 +64,7 @@ export default {
     };
   },
   methods: {
+    localize,
     async handleSubmit() {
       if (this.v$.$invalid) {
         this.v$.$touch();
@@ -79,7 +82,7 @@ export default {
         this.name = '';
         this.limit = '';
         this.v$.$reset();
-        this.$message('Категория создана');
+        this.$message(localize('createdCategoryMessage'));
         this.$emit('created', category);
       } catch (error) {}
     },

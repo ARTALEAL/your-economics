@@ -1,1 +1,20 @@
-{ "ProfileTitle": "Profile" }
+{
+  "ProfileTitle": "Profile",
+
+  "nameInput": "Name",
+  "inputErrorReq": "The field must not be empty",
+
+  "updateBtn": "Update",
+  "createBtn": "Create",
+
+  "categoriesTitle": "Categories",
+  "categoriesEmptyMessage": "You don't have categories yet",
+  "createCategoryTitle": "Create",
+  "createCategoryName": "Category name",
+  "createCategoryNameError": "Enter category name",
+
+  "inputLimitPlaceholder": "Limit",
+  "inputLimit": "Minimum amount",
+  "inputLimitCurrency": "rub",
+  "createdCategoryMessage": "Category created"
+}

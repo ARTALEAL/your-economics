@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Категории</h3>
+      <h3>{{ localize('categoriesTitle') }}</h3>
     </div>
     <section>
       <loader v-if="isLoading" />
@@ -13,7 +13,7 @@
           :key="categories.length + updateCount"
           v-if="categories.length"
         />
-        <p class="center" v-else>У вас пока нет категорий</p>
+        <p class="center" v-else>{{ localize('categoriesEmptyMessage') }}</p>
       </div>
     </section>
   </div>
@@ -23,6 +23,7 @@
 import CategoryCreate from '@/components/CategoryCreate.vue';
 import CategoryEdit from '@/components/CategoryEdit.vue';
 import Loader from '@/components/app/Loader.vue';
+import localize from '@/utils/localize';
 
 export default {
   name: 'categories',
@@ -35,6 +36,7 @@ export default {
     };
   },
   methods: {
+    localize,
     addNewCategory(category) {
       this.categories.push(category);
       console.log(this.categories);

@@ -1,1 +1,21 @@
-{ "ProfileTitle": "Профиль" }
+{
+  "ProfileTitle": "Профиль",
+
+  "nameInput": "Имя",
+  "inputErrorReq": "Поле не должно быть пустым",
+
+  "updateBtn": "Обновить",
+  "createBtn": "Создать",
+
+  "categoriesTitle": "Категории",
+  "categoriesEmptyMessage": "У вас пока нет категорий",
+  "createCategoryTitle": "Создать",
+
+  "createCategoryName": "Название",
+  "createCategoryNameError": "Введите название категории",
+
+  "inputLimitPlaceholder": "Лимит",
+  "inputLimit": "Минимальная сумма",
+  "inputLimitCurrency": "руб",
+  "createdCategoryMessage": "Категория создана"
+}
