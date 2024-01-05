@@ -1,4 +1,4 @@
-# vue-crm
+# Your-economics
 
 ## Описание
 
@@ -23,24 +23,20 @@
 - Сделана утилита для генерации цветов (100 шт. для графического отображения)
 - Реализована функция перевода приложения (без использования библиотек)
 
-## Project setup
+## Локальная установка
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Запуск локального сервера
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Сборка
 
 ```
 npm run build
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
